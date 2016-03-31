@@ -116,6 +116,8 @@ numbers=noenddot
 
 % Bilder positionieren
 \usepackage{float}
+\usepackage{rotating}
+\usepackage{rotfloat}
 
 % Mehrere parallele Bilder
 \usepackage{subfig}
