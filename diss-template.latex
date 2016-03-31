@@ -1,0 +1,175 @@
+\documentclass[
+11pt,
+twoside=false,
+index=totoc,
+numbers=noenddot
+]{scrbook}
+
+% LuaLaTeX Standardpakete
+\usepackage{luatextra} % lädt fontspec, luacode, metacode, fixltx2e, luatexbase, lualibs
+
+% Standardschriften
+\setmainfont{Minion Pro}
+\setsansfont{Myriad Pro}
+\setmonofont{Consolas}
+
+% Formelschrift
+% Minion Math ist leider eine kommerzielle Schrift
+\usepackage{MnSymbol}
+\usepackage{unicode-math}
+
+\setmathfont{MdSymbol-Regular.otf}
+\setmathfont[range=\mathup/{num,latin,Latin,greek,Greek}]{Minion Pro}
+\setmathfont[range=\mathbfup/{num,latin,Latin,greek,Greek}]{MinionPro-Bold}
+\setmathfont[range=\mathit/{num,latin,Latin,greek,Greek}]{MinionPro-It}
+\setmathfont[range=\mathbfit/{num,latin,Latin,greek,Greek}]{MinionPro-BoldIt}
+\setmathfont[range=\mathscr,StylisticSet={1}]{MinionPro-It}
+
+% Zeilenabstand
+\usepackage[onehalfspacing]{setspace}
+
+% Anführungszeichen
+\usepackage[german=guillemets]{csquotes}
+
+% Fußnote mit Abstand zum Fußnotentext
+\deffootnote{1em}{1em}{%
+\makebox[1em][l]{\textsuperscript{\thefootnotemark}}}
+
+% Fuß- und Kopfzeile
+\usepackage[automark]{scrpage2}
+\automark[section]{chapter} % Bis zu welcher Überschriftenebene soll geschrieben werden
+\pagestyle{scrheadings}
+\clearscrheadfoot % Kopf- und Fußzeile werden gelöscht
+\ohead{\headmark} % Kapitel wird in die Kopfzeile außen geschrieben
+\ofoot[\pagemark]{\pagemark} %Seitenzahl wird in die Fußzeile außen geschrieben
+\renewcommand*{\partpagestyle}{empty} % Seitenzahl bei Teilseiten löschen
+
+% Bezeichnung allgemeiner Kürzel
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\setotherlanguages{english}
+
+% Sach- und Personenregister
+\usepackage[makeindex]{splitidx}
+\newindex[Sachregister]{sach}
+\newindex[Personenregister]{pers}
+\usepackage[font=small]{idxlayout}
+
+% Verweise
+\usepackage[german]{varioref}
+\usepackage[plainpages=false,pdfpagelabels,raiselinks=true,colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black]{hyperref}
+\usepackage{cleveref}
+
+% Glossar
+\usepackage[xindy={language=german, codepage=utf8}, style=long, toc]{glossaries}
+\makeglossaries
+
+% Zitation und Bibliografie
+\usepackage[style=authoryear-icomp,hyperref=true,natbib=true]{biblatex}
+\addbibresource{bibliography.bib}
+
+% Zitation und Bibliografie
+% Zitationsstil anpassen
+% Punkte durch Doppelpunkt ersetzen
+\renewcommand{\labelnamepunct}{\addcolon\addspace}
+\renewcommand{\postnotedelim}{\addcolon\addspace}
+% Komma wegen natbib-Kompatibilität löschen
+\renewcommand*{\nameyeardelim}{\space}
+% Das S. enfernen
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
+\DeclareFieldFormat{pages}{#1}
+% Autoren in der Literaturliste als Kapitälchen
+\AtBeginBibliography{
+ \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
+}
+
+% Längere Zitate verkleinern
+\makeatletter
+\g@addto@macro\quote{\small}
+\makeatother
+
+% Eingangszitat
+\usepackage{epigraph}
+\setlength{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{0.5\textwidth}
+\renewcommand{\textflush}{flushepinormal}
+
+% Pandoc Template Anpassungen
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Beschriftung von Grafiken und Tabellen
+\usepackage[labelfont=bf]{caption}
+\setlength{\belowcaptionskip}{10pt}
+
+% Bildermanagement
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+% Farbmanagement
+\usepackage{xcolor}
+
+% Grafikproduktion
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,fit,decorations.pathreplacing}
+
+% Bilder positionieren
+\usepackage{float}
+
+% Mehrere parallele Bilder
+\usepackage{subfig}
+
+% Tabellen
+\usepackage{longtable}
+\usepackage{booktabs}
+
+% Absatzkontrolle aktivieren
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Schrifgröße der Verzeichnisse verringern
+\renewcommand{\bibfont}{\normalfont\small}
+\renewcommand{\glsnamefont}[1]{\mdseries\small #1}
+
+
+% Inhaltsverzeichnis umbenennen
+\addto\captionsgerman{
+  \renewcommand{\contentsname}{Inhalt}
+}
+
+% Glossareinträge
+\newglossaryentry{GDA}{name = GDA, description = {Geometrische Datenanalyse}}
+
+\begin{document}
+    \titlehead{PH Karlsruhe, Institut für Allgemeine und Historische Erziehungswissenschaft}
+    \subject{Dissertation}
+    \title{Zeit-Raum Studium}
+    \subtitle{Eine Sozioanalyse über Studierende in der Studieneingangsphase}
+    \author{Fabian Mundt}
+    \date{2017}
+    \publishers{Betreut durch alp. Prof. Dr. Timo Hoyer \& Prof. Dr. Gabriele Weigand}
+\maketitle
+
+\begingroup
+  \ohead{}
+  \pagenumbering{roman}
+  \tableofcontents
+  \listoftables
+  \listoffigures
+  \clearpage
+\endgroup
+
+\ohead{\headmark}
+\pagenumbering{arabic}
+
+$body$
+
+\printbibliography[title=Literaturverzeichnis, heading=bibintoc]
+
+\printglossary
+
+\printindex*
+
+\end{document}
