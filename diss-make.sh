@@ -25,6 +25,22 @@ sed -i '' '/end{figure}/ {
     }
 }' zeit-raum-studium.tex
 
+# Diagrammumgebung
+sed -i '' '/diagram-start/ {
+    N
+    N
+    s/diagram-start\n.*\n.*/begin{diagram}[H]/g
+    }' zeit-raum-studium.tex
+
+sed -i '' '/end{figure}/ {
+    N
+    N
+    /\diagram-end/ {
+        N
+        s/end{figure}\n.*\diagram-end/end{diagram}/g
+    }
+}' zeit-raum-studium.tex
+
 # Tabellen nicht trimmern
 # sed -i '' 's/@{}//g' 'zeit-raum-studium.tex'
 

@@ -122,6 +122,15 @@ numbers=noenddot
 % Mehrere parallele Bilder
 \usepackage{subfig}
 
+% Spezielle Umgebung für Diagramme
+\DeclareNewTOC[%
+  type=diagram,%
+  float,%
+  counterwithin=chapter,
+  name=Diagramm,%
+  listname={Diagrammverzeichnis}%
+]{loq}
+
 % Tabellen
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -160,6 +169,7 @@ numbers=noenddot
   \tableofcontents
   \listoftables
   \listoffigures
+  \listofdiagrams
   \clearpage
 \endgroup
 
